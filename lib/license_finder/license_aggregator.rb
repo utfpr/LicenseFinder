@@ -44,6 +44,7 @@ module LicenseFinder
     end
 
     def aggregate_packages
+      require 'pry-nav';binding.pry
       return @packages unless @packages.nil?
 
       all_packages = finders.flat_map do |finder|

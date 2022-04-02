@@ -8,6 +8,7 @@ require 'license_finder/license_aggregator'
 require 'license_finder/project_finder'
 require 'license_finder/logger'
 require 'license_finder/printer'
+require 'license_finder/conflicts_finder'
 
 module LicenseFinder
   module CLI
@@ -96,6 +97,11 @@ module LicenseFinder
                       type: :boolean,
                       desc: 'For reports, use the SPDX identifier instead of license name (useful to match license with other standard tools)',
                       default: false
+      end
+
+      desc 'conflicts', 'Command to return license conflicts on examinated project'
+      def conflicts
+        ConflictsFinder.new(config, aggregate_paths).find_conflicts
       end
 
       desc 'project_roots', 'List project directories to be scanned'
